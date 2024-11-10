@@ -1,0 +1,131 @@
+{% extends 'student/studentbase.html' %}
+{% block content %}
+{% load static %}
+
+<head>
+  <!-- Include Bootstrap 4 CSS and JS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    /* Custom styling for the form */
+    .question-card {
+      border: 2px solid #dcdcdc;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .question-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-check-label {
+      font-size: 16px;
+    }
+
+    .btn-submit {
+      font-size: 18px;
+      padding: 10px 30px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-submit:hover {
+      background-color: #0056b3;
+    }
+
+    .question-header {
+      font-size: 24px;
+      font-weight: bold;
+      color: #007bff;
+    }
+
+    .marks-info {
+      font-size: 18px;
+      color: #28a745;
+      text-align: right;
+    }
+
+    .form-check-input {
+      transform: scale(1.3);
+      margin-right: 10px;
+    }
+
+  </style>
+</head>
+
+<div class="jumbotron my-4">
+  <form class="form" autocomplete="off" onsubmit="return saveAns()" action="/student/calculate-marks" method="POST">
+    {% csrf_token %}
+    <h1 class="text-center">{{ course.course_name }}</h1>
+    <div class="container">
+      {% for q in questions %}
+        <div class="question-card">
+          <div class="question-header">{{ forloop.counter }}. {{ q.question }}</div>
+          <div class="marks-info">[Marks {{ q.marks }}]</div>
+
+          <!-- Radio button options -->
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="{{ forloop.counter }}" id="option1-{{ forloop.counter }}" value="Option1">
+            <label class="form-check-label" for="option1-{{ forloop.counter }}">
+              {{ q.option1 }}
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="{{ forloop.counter }}" id="option2-{{ forloop.counter }}" value="Option2">
+            <label class="form-check-label" for="option2-{{ forloop.counter }}">
+              {{ q.option2 }}
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="{{ forloop.counter }}" id="option3-{{ forloop.counter }}" value="Option3">
+            <label class="form-check-label" for="option3-{{ forloop.counter }}">
+              {{ q.option3 }}
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="{{ forloop.counter }}" id="option4-{{ forloop.counter }}" value="Option4">
+            <label class="form-check-label" for="option4-{{ forloop.counter }}">
+              {{ q.option4 }}
+            </label>
+          </div>
+        </div>
+      {% endfor %}
+
+      <div class="text-center mt-4">
+        <button class="btn-submit" type="submit">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+  function saveAns() {
+    var ele = document.getElementsByTagName('input');
+    for (i = 0; i < ele.length; i++) {
+      if (ele[i].type === "radio") {
+        if (ele[i].checked) {
+          setCookie(ele[i].name, ele[i].value, 3);
+        }
+      }
+    }
+  }
+
+  function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+</script>
+
+{% endblock content %}

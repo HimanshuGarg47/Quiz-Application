@@ -1,0 +1,115 @@
+{% extends 'student/studentbase.html' %}
+{% block content %}
+{%load static%}
+
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <style>
+    .video-card {
+      border: 2px solid #007bff;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .video-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .video-thumbnail {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .video-card-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #007bff;
+      margin-bottom: 10px;
+    }
+
+    .video-btn {
+      background-color: #007bff;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 5px;
+      text-align: center;
+      font-size: 0.9rem;
+      text-decoration: none;
+    }
+
+    .video-btn:hover {
+      background-color: #0056b3;
+      text-decoration: none;
+    }
+  </style>
+
+</head>
+<br><br>
+<div class="container my-4">
+    <div class="row">
+        <h3 class="text-info text-center mb-4">Recommended Videos for {{ course.course_name }}</h3>
+        {% for video in related_videos %}
+            <div class="col-lg-4 col-md-6 col-sm-12 my-3">
+                <div class="video-card">
+                    <img class="video-thumbnail" src="{{ video.thumbnail }}" alt="Thumbnail for {{ video.title }}">
+                    <div class="card-body">
+                        <h5 class="video-card-title">{{ video.title }}</h5>
+                        <a href="https://www.youtube.com/watch?v={{ video.video_id }}" target="_blank" class="video-btn">Watch Video</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="jumbotron">
+
+	      <h3 class="text-info text-center">Before you start the Exam, here are the rules</h3>
+
+        <div class="row">
+
+            <div class="card border-info mx-4 my-4">
+                <div class="card-body text-info">
+
+                    <h4 class="card-title">Exam Details :</h4>
+                    <p class="card-text">
+                        </p><ul style="list-style:decimal;">
+                            <li>Exam Name : {{course.course_name}}</li>
+                            <li>Total Question : {{total_questions}}</li>
+                            <li>Total Marks : {{total_marks}}</li>
+                        </ul>
+                    <p></p>
+
+
+
+                    <h4 class="card-title">Rules :</h4>
+                    <p class="card-text">
+                        </p><ul style="list-style:decimal;">
+                            <li>All questions are multiple choice question.</li>
+                            <li><span class="text-danger">Only one choice is correct.</span></li>
+                            <li>Every question carry different marks 
+                            </li>
+                
+                            <li>Try to answer as quickly as you can.</li>
+                            <li>If you press refresh or go back to the previous page, there will be a new question for you and the question you were on will be counted as attempted.</li>
+                            <li>Questions are displayed randomly for every user.</li>
+                            <li>You will be told your marks immediately when you submit the answer.</li>
+                        </ul>
+                    <p></p>
+                    <a href="{% url 'start-exam' course.id  %}" class="btn btn-info">Let's Start</a>
+                </div>  
+                <div class="card-footer">Best Of Luck</div>  
+            </div>  
+        </div>  
+
+    </div>
+</div>
+
+<br><br><br><br><br><br>
+{% endblock content %}
