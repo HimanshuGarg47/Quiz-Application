@@ -1,61 +1,46 @@
-# Online Quiz
-### Admin
-- Create Admin account using command
-```
-py manage.py createsuperuser
-```
-- After Login, can see Total Number Of Student, Teacher, Course, Questions are there in system on Dashboard.
-- Can View, Update, Delete, Approve Teacher.
-- Can View, Update, Delete Student.
-- Can Also See Student Marks.
-- Can Add, View, Delete Course/Exams.
-- Can Add Questions To Respective Courses With Options, Correct Answer, And Marks.
-- Can View And Delete Questions Too.
+# Django-Based Online Quiz Management System
 
-### Teacher
-- Apply for job in System. Then Login (Approval required by system admin, Then only teacher can login).
-- After Login, can see Total Number Of Student, Course, Questions are there in system on Dashboard.
-- Can Add, View, Delete Course/Exams.
-- Can Add Questions To Respective Courses With Options, Correct Answer, And Marks.
-- Can View And Delete Questions Too.
-> **_NOTE:_**  Basically Admin Will Hire Teachers To Manage Courses and Questions.
+A comprehensive online quiz management platform built with Django, featuring role-based access for **Admins**, **Teachers**, and **Students**. The project enables effective management, execution, and performance analysis of quizzes. With data-driven insights powered by machine learning, teachers can provide targeted support based on individual and class-wide performance metrics.
 
-### Student
-- Create account (No Approval Required By Admin, Can Login After Signup)
-- After Login, Can See How Many Courses/Exam And Questions Are There In System On Dashboard.
-- Can Give Exam Any Time, There Is No Limit On Number Of Attempt.
-- Can View Marks Of Each Attempt Of Each Exam.
-- Question Pattern Is MCQ With 4 Options And 1 Correct Answer.
 ---
 
-## HOW TO RUN THIS PROJECT
-- Install Python(3.7.6) (Dont Forget to Tick Add to Path while installing Python)
-- Open Terminal and Execute Following Commands :
-```
-python -m pip install -r requirements. txt
-```
-- Download This Project Zip Folder and Extract it
-- Move to project folder in Terminal. Then run following Commands :
-```
-py manage.py makemigrations
-py manage.py migrate
-py manage.py runserver
-```
-- Now enter following URL in Your Browser Installed On Your Pc
-```
-http://127.0.0.1:8000/
+## 🧑‍💻 User Roles & Features
+
+### **Admin**
+- **Account Setup**: Created via command line.
+- **Dashboard**: Displays total count of students, teachers, courses, and questions.
+- **User Management**: Approve, update, or delete teachers, manage students, and view student marks.
+- **Course & Exam Management**: Add, view, delete courses and questions, including options and correct answers.
+
+### **Teacher**
+- **Account Setup**: Requires admin approval after applying.
+- **Dashboard**: Displays information on students, courses, and questions.
+- **Course & Exam Management**: Manages courses and adds questions with detailed options and marks.
+
+### **Student**
+- **Account Setup**: Can self-register and log in without admin approval.
+- **Dashboard**: Accesses available courses and questions.
+- **Exam Attempts**: Can take quizzes multiple times with results available for each attempt.
+
+**Note**: Admins are responsible for hiring teachers to manage courses and questions.
+
+---
+
+## 🛠️ Setup Instructions
 ```
 
-## CHANGES REQUIRED FOR CONTACT US PAGE
-- In settins.py file, You have to give your email and password
-```
-EMAIL_HOST_USER = 'youremail@gmail.com'
-EMAIL_HOST_PASSWORD = 'your email password'
-EMAIL_RECEIVING_USER = 'youremail@gmail.com'
-```
 
-## Drawbacks/LoopHoles
-- Admin/Teacher can add any number of questions to any course, But while adding course, admin provide question number.
+### 1. Install Dependencies
+Ensure you have **Python 3.7.6** and required dependencies:
+```bash
+git clone url
+cd Quiz-Application
 
+python -m venv .venv
+.\.venv\Scripts\acitvate
 
+python -m pip install -r requirements.txt
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
 
